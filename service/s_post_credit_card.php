@@ -42,6 +42,23 @@ include 'model/m_post_credit_card.php';
 
 
 
+    public function proofPostCreditCard($fkac)
+    {  
+      
+     $this->c_post_cc->setFkcc($fkac); 
+
+      if ( $this->m_post_cc->selectLastPost($this->c_post_cc) ) {
+          return $this->c_post_cc->getList();
+      }else{
+          return $this->c_post_cc->getMsg();
+      }
+   
+   }
+
+
+
+
+
     public function listPostsByCreditCardAll($data)
     { 
       //  $this->c_post_cc->setFkcc($id);  

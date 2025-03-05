@@ -35,7 +35,7 @@ class M_Post_Credit_Card extends Conn
          $sql->bindValue(":fk",     $cpcc->getFkcc());
 
          if ( $sql->execute() ) {
-          $cpcc->setMsg("success");
+          $cpcc->setMsg("post_creditcard ".getPlaceShop()." success");
           }else{
           $cpcc->setMsg("error");             
          }       
@@ -249,7 +249,34 @@ class M_Post_Credit_Card extends Conn
 
 
 
+ 
 
+
+  public function selectLastPost(C_Post_Credit_Card $cpcc):bool
+  {
+      $query = "SELECT * FROM tb_post_creditcard WHERE fk_cc = :fkcc ORDER BY id_pcc DESC LIMIT 1" ;
+      $sql = $this->pdo->prepare($query); 
+      $sql->bindValue(':fkcc', $cpcc->getFkcc());    
+      $sql->execute();
+
+      if ($sql->rowCount() > 0) {
+
+        $registration_post = array();
+
+        while ($registration = $sql->fetchAll(PDO::FETCH_ASSOC)) {
+             $registration_post = $registration;
+        }
+
+        $cpcc->setList($registration_post);
+        return true;
+       
+     }else{ 
+
+        $cpcc->setMsg("not found");
+        return false; 
+     }
+
+  }
 
 
 

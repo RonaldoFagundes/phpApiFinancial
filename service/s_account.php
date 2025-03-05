@@ -25,7 +25,7 @@ include 'model/m_account.php';
         $this->c_account->setDesc($data['account']['desc']);
         $this->c_account->setAmount($data['account']['amount']);
         $this->c_account->setFkBank($data['account']['fkbnk']);
-        $this->m_account->inserAccount($this->c_account);    
+        $this->m_account->insertAccount($this->c_account);    
         return  $this->c_account->getMsg();
     
     }
@@ -42,6 +42,10 @@ include 'model/m_account.php';
        }
     
     }
+
+
+
+   
 
 
 
@@ -88,10 +92,21 @@ include 'model/m_account.php';
 
            return $this->c_account->getMsg();
 
-       }   
+       }         
        
-       
+    }
 
+
+
+    public function getAmountById($id){  
+                
+       $this->c_account->setId($id);        
+
+       if ( $this->m_account->selectAmountById($this->c_account) ) {
+           return $this->c_account->getAmount();
+       }else{
+           return $this->c_account->getMsg();
+       }    
     }
 
 

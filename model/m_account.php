@@ -16,7 +16,7 @@ class M_Account extends Conn
  
 
 
-  public function inserAccount(C_Account $c_account )
+  public function insertAccount(C_Account $c_account )
   {         
      $query = "INSERT INTO tb_bank_account (number_bka, type_bka , open_date_bka, desc_bka , amount_bka, fk_bank )
      VALUES(:number, :type, :open, :desc, :amount, :fk)";
@@ -109,6 +109,11 @@ class M_Account extends Conn
      }
 
   }
+
+
+ 
+
+
 
 
 
@@ -225,16 +230,27 @@ class M_Account extends Conn
 
 
 
+  public function selectAmountById(C_Account $c_account):bool
+  {
+      $query = "SELECT amount_bka AS value from tb_bank_account WHERE id_bka= :id" ;
+      $sql = $this->pdo->prepare($query); 
+      $sql->bindValue(':id', $c_account->getId());    
+      $sql->execute();
+     
+      if ($sql->rowCount() > 0) {
 
+         $amount = $sql->fetch();
+         $c_account->setAmount($amount['value']);
+         return true ;         
 
+      }else{ 
 
+         $c_account->setMsg("not found"); 
+         return false;
+         
+     }
 
-
-
-
-
-
-
+  }
 
 
 

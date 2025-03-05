@@ -102,9 +102,7 @@ if ($_GET['action'] === 'cadUser') {
     echo json_encode($s_account->listAccountByBank($idBank));
 
 
-
 }else if ($_GET['action'] === 'listAccountByBankIgnoreId'){
-
 
     $array_account = [
         $data['surchAccount']['id'],
@@ -113,6 +111,11 @@ if ($_GET['action'] === 'cadUser') {
 
     echo json_encode($s_account->listAccountByBankIgnoreId($data));    
 
+
+}else if ($_GET['action'] === 'amountAccountById'){
+
+    $id = $data['id'];
+    echo json_encode($s_account->getAmountById($id));   
 
 }else if ($_GET['action'] === 'updateAccount'){
    
@@ -164,9 +167,7 @@ if ($_GET['action'] === 'cadUser') {
       $data['cadCreditCard']['idac'],
     ];
 
-echo json_encode($s_cc->cadCreditCardData($data)); 
-
-
+    echo json_encode($s_cc->cadCreditCardData($data)); 
     
 }else if ($_GET['action'] === 'creditCardByAccount'){
 
@@ -188,6 +189,13 @@ echo json_encode($s_cc->cadCreditCardData($data));
         // echo json_encode($dados['creditCard']['type']);
         //echo json_encode($creditCard);
     echo json_encode($s_pcc->postCreditCardData($data));
+
+
+}else if ($_GET['action'] === 'proofPostCreditCard') {
+
+    $fkac = $data['fkac']; 
+    echo json_encode($s_pcc->proofPostCreditCard($fkac));
+
   
 } else if ($_GET['action'] === 'listPostByCreditCard') {
 
@@ -258,13 +266,17 @@ echo json_encode($s_cc->cadCreditCardData($data));
         $data['transaction']['form'],
         $data['transaction']['desc'],
         $data['transaction']['value'],
-        $data['transaction']['idac'],
-        $data['transaction']['idacf'],
+        $data['transaction']['idac'],        
   ];
 
    //  echo json_encode($array_transaction);
 
     echo json_encode($s_t->transactionsData($data));
+
+}else if ($_GET['action'] === 'proofTransaction') {
+    
+    $id = $data['id'];
+    echo json_encode($s_t->proofTransaction($id));
 
 }else if ($_GET['action'] === 'conect'){
 

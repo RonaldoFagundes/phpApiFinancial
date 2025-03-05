@@ -7,8 +7,7 @@ class C_Transactions
 
  
     private $id;
-    private $fkcc;
-    private $in_out;    
+    private $fkac;
     private $mov; 
     private $date;
     private $type;
@@ -46,17 +45,17 @@ class C_Transactions
     /**
      * Get the value of fkcc
      */
-    public function getFkcc()
+    public function getFkac()
     {
-        return $this->fkcc;
+        return $this->fkac;
     }
 
     /**
      * Set the value of fkcc
      */
-    public function setFkcc($fkcc): self
+    public function setFkac($fkac): self
     {
-        $this->fkcc = $fkcc;
+        $this->fkac = $fkac;
 
         return $this;
     }
@@ -223,23 +222,7 @@ class C_Transactions
         return $this;
     }
 
-    /**
-     * Get the value of in_out
-     */
-    public function getInOut()
-    {
-        return $this->in_out;
-    }
 
-    /**
-     * Set the value of in_out
-     */
-    public function setInOut($in_out): self
-    {
-        $this->in_out = $in_out;
-
-        return $this;
-    }
 
    
 
