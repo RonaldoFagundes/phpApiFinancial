@@ -3,12 +3,17 @@
 include 'controller/c_transactions.php';
 include 'model/m_transactions.php';
 
+//include 'controller/c_cash_mov.php';
+//include 'model/m_cash_mov.php';
 
 
  class S_Transactions {
 
     private $c_trs = "";
     private $m_trs = "";  
+
+    private $m_cm = ""; 
+    private $c_cm = ""; 
 
 
 
@@ -32,16 +37,36 @@ include 'model/m_transactions.php';
         $this->c_trs->setValue($data['transaction']['value']);
         $this->c_trs->setFkac($data['transaction']['idac']); 
         
-              
-        if ( $data['transaction']['type'] == "saque" ) {
-          
-              return " return ".$data['transaction']['type']." chamar metodo cash ";
+        $this->m_trs->insertTransactions($this->c_trs);                
+           // return  $this->c_trs->getMsg();  
 
-        }else{
+         if( $data['transaction']['type'] === "Saque" ){
 
-            $this->m_trs->insertTransactions($this->c_trs);    
-            return  $this->c_trs->getMsg();  
-        }
+            $this->c_cm = new C_Cash_Mov();
+            $this->m_cm = new M_Cash_Mov();   
+            
+            //$data['transaction']['type'],
+            //$data['transaction']['number'],
+
+           $fk = ($data['transaction']['idac']) ;
+           $id = $this->proofTransaction($fk)[0]['id_trs'];
+                       
+            $this->c_cm->setDate($data['transaction']['date']);
+            $this->c_cm->setType('in');      
+            $this->c_cm->setCategory($data['transaction']['type']);
+            $this->c_cm->setSource($data['transaction']['account']."  ".$data['transaction']['number']);    
+            $this->c_cm->setDesc($data['transaction']['desc']);   
+            $this->c_cm->setValue($data['transaction']['value']);       
+            //$this->c_cm->setFktrs($data['transaction']['fktrs']); 
+            $this->c_cm->setFktrs($id); 
+            $this->m_cm->insertCashMov($this->c_cm);         
+           
+         }
+
+         
+        return  $this->c_trs->getMsg()." ".$this->c_cm->getMsg();
+
+    }
         
 
         /*
@@ -52,14 +77,14 @@ include 'model/m_transactions.php';
         }
          */
 
-    }
+    
 
 
 
 
-    public function proofTransaction($id)
+    public function proofTransaction($fkac)
     {  
-      $this->c_trs->setId($id);
+      $this->c_trs->setFkac($fkac);
        
       if ( $this->m_trs->selectLastTransaction($this->c_trs) ) {
           return $this->c_trs->getList();

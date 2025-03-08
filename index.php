@@ -13,6 +13,7 @@ include 'service/s_account.php';
 include 'service/s_credit_card.php';
 include 'service/s_post_credit_card.php';
 include 'service/s_transactions.php';
+include 'service/s_cash_mov.php';
 
 
 $s_user    = new S_User();
@@ -21,6 +22,7 @@ $s_account = new S_Account();
 $s_cc      = new S_Credit_Card();
 $s_pcc     = new S_Post_Credit_Card();
 $s_t       = new S_Transactions();
+$s_cm      = new S_Cash_Mov();
 
 
 
@@ -253,7 +255,8 @@ if ($_GET['action'] === 'cadUser') {
         $creditCard = [
               $data['creditCard']['id']
         ];
-        echo json_encode($ccps->deletePost($data));    
+        echo json_encode($ccps->deletePost($data)); 
+     
        */ 
       
 }else if ($_GET['action'] === 'postTransaction') {  
@@ -266,6 +269,8 @@ if ($_GET['action'] === 'cadUser') {
         $data['transaction']['form'],
         $data['transaction']['desc'],
         $data['transaction']['value'],
+        $data['transaction']['account'],
+        $data['transaction']['number'],
         $data['transaction']['idac'],        
   ];
 
@@ -275,8 +280,27 @@ if ($_GET['action'] === 'cadUser') {
 
 }else if ($_GET['action'] === 'proofTransaction') {
     
-    $id = $data['id'];
-    echo json_encode($s_t->proofTransaction($id));
+    $fkac = $data['fkac'];
+    echo json_encode($s_t->proofTransaction($fkac));
+
+
+}else if ($_GET['action'] === 'postCashMov') {
+    
+    $array_cashMov = [                 
+        $data['cashMov']['date'],
+        $data['cashMov']['type'],
+        $data['cashMov']['source'],        
+        $data['cashMov']['category'],
+        $data['cashMov']['desc'],
+        $data['cashMov']['value'],
+        $data['cashMov']['fktrs'],        
+  ];
+
+    echo json_encode($s_cm->postCashMovData($data));
+
+}else if ($_GET['action'] === 'proofCashMov') {    
+   
+    echo json_encode($s_cm->proofCashMov());
 
 }else if ($_GET['action'] === 'conect'){
 

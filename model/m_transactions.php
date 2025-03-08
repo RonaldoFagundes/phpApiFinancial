@@ -36,11 +36,12 @@ class M_Transactions extends Conn
          $sql->bindValue(":fk",     $ctr->getFkac());
 
          if ( $sql->execute() ) {
-          $ctr->setMsg(" transactions ".getSource()."success");
+          $ctr->setMsg(" transactions ".$ctr->getType()." success ");
           }else{
           $ctr->setMsg("error");             
          } 
 
+    }
       /*
        if($cpcc->getInOut() == true){
           
@@ -65,7 +66,7 @@ class M_Transactions extends Conn
        }
      */
 
-    }
+   
 
 
 
@@ -73,10 +74,10 @@ class M_Transactions extends Conn
 
     public function selectLastTransaction(C_Transactions $ctr):bool
     {
-        $query = "SELECT * FROM tb_transactions WHERE id_trs=:id ORDER BY id_trs DESC LIMIT 1" ;
+        $query = "SELECT * FROM tb_transactions WHERE fk_bac=:fkac ORDER BY id_trs DESC LIMIT 1" ;
 
         $sql = $this->pdo->prepare($query); 
-        $sql->bindValue(":id",$ctr->getId());
+        $sql->bindValue(":fkac",$ctr->getFkac());
         
         $sql->execute();
   
