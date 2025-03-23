@@ -302,6 +302,10 @@ if ($_GET['action'] === 'cadUser') {
    
     echo json_encode($s_cm->proofCashMov());
 
+}else if ($_GET['action'] === 'cashAmount') {    
+   
+    echo json_encode($s_cm->cashAmount());
+
 }else if ($_GET['action'] === 'conect'){
 
       $res = http_response_code(200);

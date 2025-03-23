@@ -78,6 +78,36 @@ class M_Cash_Mov extends Conn
 
 
 
+    public function selectAmount(C_Cash_Mov $cm)
+  {
+      $query = "SELECT sum(CASE WHEN  type_cm = 'in'  THEN  value_cm ELSE 0 END)as cash_in ,
+       sum(CASE WHEN  type_cm = 'out' THEN  value_cm ELSE 0 END)as cash_out from tb_cash_mov tcm ;";
+
+      $sql = $this->pdo->prepare($query); 
+          
+      $sql->execute();
+
+     
+      if ($sql->rowCount() > 0) {
+
+         $result = $sql->fetch();
+
+         $cash_in = ($result['cash_in']);
+         $cash_out = ($result['cash_out']);
+         $amount =  $cash_in - $cash_out ;
+
+         $cm->setMsg($amount);            
+
+      }else{ 
+
+         $cm->setMsg("not found");         
+         
+     }
+
+  }
+
+
+
 
 
 }  

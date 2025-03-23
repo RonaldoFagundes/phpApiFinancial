@@ -59,15 +59,19 @@ include 'model/m_transactions.php';
             $this->c_cm->setValue($data['transaction']['value']);       
             //$this->c_cm->setFktrs($data['transaction']['fktrs']); 
             $this->c_cm->setFktrs($id); 
-            $this->m_cm->insertCashMov($this->c_cm);         
+            $this->m_cm->insertCashMov($this->c_cm); 
+            
+            return  $this->c_trs->getMsg()." ".$this->c_cm->getMsg();
            
-         }
+         }else{
 
-         
-        return  $this->c_trs->getMsg()." ".$this->c_cm->getMsg();
-
+            return  $this->c_trs->getMsg();
+         }     
+        
     }
         
+
+    
 
         /*
         if( $data['transaction']['idacf'] != 0 ){          

@@ -85,7 +85,8 @@ class M_Account extends Conn
         tb_bank_account.type_bka ,
         tb_bank_account.number_bka
       FROM tb_bank 
-      INNER JOIN tb_bank_account ON (fk_bank = id_bnk ) WHERE tb_bank_account.id_bka not in (:id);" ;
+      INNER JOIN tb_bank_account ON (fk_bank = id_bnk ) WHERE tb_bank_account.id_bka not in (:id)
+      and tb_bank_account.type_bka not in ('Investimentos');" ;
       
       $sql = $this->pdo->prepare($query); 
       $sql->bindValue(':id', $c_account->getId());   

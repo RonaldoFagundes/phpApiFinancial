@@ -49,4 +49,13 @@ class S_Cash_Mov {
    }
 
 
+
+
+   public function cashAmount()
+    {              
+      $this->m_cm->selectAmount($this->c_cm)  ;
+      return $this->c_cm->getMsg();         
+   }
+
+
 }
