@@ -254,6 +254,32 @@ class M_Account extends Conn
   }
 
 
+  public function selectAccountType(C_Account $c_account):bool
+  {
+      $query = "SELECT distinct type_bka from tb_bank_account order by type_bka;" ;
+      $sql = $this->pdo->prepare($query);    
+      $sql->execute();
+
+      if ($sql->rowCount() > 0) {
+
+        $list_type = array();
+
+        while ($type = $sql->fetchAll(PDO::FETCH_ASSOC)) {
+             $list_type = $type;
+        }
+
+        $c_account->setList($list_type);
+        return true;
+       
+     }else{ 
+
+        $c_account->setMsg("not found");
+        return false; 
+     }
+
+  }
+
+
 
 
   public function updateAccount(C_Account $c_account)

@@ -111,8 +111,12 @@ if ($_GET['action'] === 'cadUser') {
         $data['surchAccount']['fkbnk'],
       ];
 
-    echo json_encode($s_account->listAccountByBankIgnoreId($data));    
+    echo json_encode($s_account->listAccountByBankIgnoreId($data));  
+    
+    
+}else if ($_GET['action'] === 'listAccountType'){
 
+   echo json_encode($s_account->listAccountType());
 
 }else if ($_GET['action'] === 'amountAccountById'){
 

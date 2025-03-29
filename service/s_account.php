@@ -97,6 +97,19 @@ include 'model/m_account.php';
     }
 
 
+    public function listAccountType()
+     {  
+        
+       if ( $this->m_account->selectAccountType($this->c_account) ) {
+           return $this->c_account->getList();
+       }else{
+           return $this->c_account->getMsg();
+       }
+    
+    }
+
+
+
 
     public function getAmountById($id){  
                 
