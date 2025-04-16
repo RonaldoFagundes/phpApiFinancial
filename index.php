@@ -14,7 +14,7 @@ include 'service/s_credit_card.php';
 include 'service/s_post_credit_card.php';
 include 'service/s_transactions.php';
 include 'service/s_cash_mov.php';
-
+include 'service/s_investments.php';
 
 $s_user    = new S_User();
 $s_bank    = new S_Bank();
@@ -23,6 +23,7 @@ $s_cc      = new S_Credit_Card();
 $s_pcc     = new S_Post_Credit_Card();
 $s_t       = new S_Transactions();
 $s_cm      = new S_Cash_Mov();
+$s_inv     = new S_Investments();
 
 
 
@@ -279,7 +280,6 @@ if ($_GET['action'] === 'cadUser') {
   ];
 
    //  echo json_encode($array_transaction);
-
     echo json_encode($s_t->transactionsData($data));
 
 }else if ($_GET['action'] === 'proofTransaction') {
@@ -309,6 +309,24 @@ if ($_GET['action'] === 'cadUser') {
 }else if ($_GET['action'] === 'cashAmount') {    
    
     echo json_encode($s_cm->cashAmount());
+
+
+}else if ($_GET['action'] === 'postInvestments') { 
+  
+    $array_investments = [                 
+        $data['investments']['broker'],
+        $data['investments']['cat'],
+        $data['investments']['type'],
+        $data['investments']['open'],        
+        $data['investments']['expery'],
+        $data['investments']['rateType'],
+        $data['investments']['rate'],
+        $data['investments']['amount'],
+        $data['investments']['desc'],        
+        $data['investments']['idac'],        
+  ];
+
+    echo json_encode($s_inv->investmentsData($data));
 
 }else if ($_GET['action'] === 'conect'){
 

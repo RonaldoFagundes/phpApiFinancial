@@ -28,6 +28,11 @@ include 'model/m_transactions.php';
 
     public function transactionsData($data)
     {  
+
+
+       // return $data;
+
+       
         $this->c_trs->setMov($data['transaction']['move']);     
         $this->c_trs->setDate($data['transaction']['date']);
         $this->c_trs->setType($data['transaction']['type']);      
@@ -66,7 +71,9 @@ include 'model/m_transactions.php';
          }else{
 
             return  $this->c_trs->getMsg();
-         }     
+         }  
+            
+         
         
     }
         

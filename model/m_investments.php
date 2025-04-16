@@ -1,14 +1,14 @@
 <?php
 
-
 require_once 'conn.php';
 
-class M_Transactions extends Conn
 
-
+class M_Investments extends Conn
 {
+
   private $conn = "";
   private $pdo = "";
+
 
     function __construct()
     {
@@ -18,7 +18,9 @@ class M_Transactions extends Conn
 
 
 
-    public function insertTransactions(C_Transactions $ctr)
+    
+
+    public function insertInvestments(C_Investments $ci)
     {     
 
          $query = "INSERT INTO tb_transactions (mov_trs, date_trs, type_trs, source_trs, form_trs, desc_trs, value_trs, fk_bac)
@@ -42,37 +44,12 @@ class M_Transactions extends Conn
          } 
 
     }
-      /*
-       if($cpcc->getInOut() == true){
-          
-          $query = " INSERT INTO tb_transactions (mov_trs, date_trs, type_trs, source_trs, form_trs, desc_trs,  value_trs, fk_bac)
-          VALUES( in , :date, :user, :parcel, :value, :desc, :expery, :fk  ) ";
-          $sql = $this->pdo->prepare($query);
-               
-          $sql->bindValue(":shop",   $cpcc->getPlaceShop());
-          $sql->bindValue(":date",   $cpcc->getDate());         
-          $sql->bindValue(":user",   $cpcc->getUser());
-          $sql->bindValue(":parcel", $cpcc->getParcel());
-          $sql->bindValue(":value",  $cpcc->getValue());
-          $sql->bindValue(":desc",   $cpcc->getDesc());
-          $sql->bindValue(":expery", $cpcc->getExpery());
-          $sql->bindValue(":fk",     $cpcc->getFkcc());
- 
-          if ( $sql->execute() ) {
-           $cpcc->setMsg("success");
-           }else{
-           $cpcc->setMsg("error");             
-          }        
-       }
-     */
-
-   
 
 
 
 
 
-    public function selectLastTransaction(C_Transactions $ctr):bool
+    public function selectLastInvestment(C_Investments $ci):bool
     {
         $query = "SELECT * FROM tb_transactions WHERE fk_bac=:fkac ORDER BY id_trs DESC LIMIT 1" ;
 
@@ -103,5 +80,9 @@ class M_Transactions extends Conn
 
 
 
+
+
 }
+
+
 
