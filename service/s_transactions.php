@@ -29,9 +29,7 @@ include 'model/m_transactions.php';
     public function transactionsData($data)
     {  
 
-
        // return $data;
-
        
         $this->c_trs->setMov($data['transaction']['move']);     
         $this->c_trs->setDate($data['transaction']['date']);
@@ -39,7 +37,7 @@ include 'model/m_transactions.php';
         $this->c_trs->setSource($data['transaction']['source']);    
         $this->c_trs->setForm($data['transaction']['form']); 
         $this->c_trs->setDesc($data['transaction']['desc']);   
-        $this->c_trs->setValue($data['transaction']['value']);
+        $this->c_trs->setValue($data['transaction']['valuet']);
         $this->c_trs->setFkac($data['transaction']['idac']); 
         
         $this->m_trs->insertTransactions($this->c_trs);                

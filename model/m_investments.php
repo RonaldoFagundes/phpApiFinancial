@@ -23,24 +23,30 @@ class M_Investments extends Conn
     public function insertInvestments(C_Investments $ci)
     {     
 
-         $query = "INSERT INTO tb_transactions (mov_trs, date_trs, type_trs, source_trs, form_trs, desc_trs, value_trs, fk_bac)
-         VALUES( :mov, :date, :type, :source, :form, :desc, :value, :fk ) ";
+         $query = "INSERT INTO tb_investments (broker_name_ivt, cat_ivt, type_ivt, open_ivt, expery_ivt, rate_type_ivt, rate_ivt, value_ivt, desc_ivt, status_ivt, fk_bka)
+         VALUES(:broker, :cat, :type, :open, :expery, :rateType, :rate, :value, :desc, :status, :fk ) ";
      
          $sql = $this->pdo->prepare($query);
-              
-         $sql->bindValue(":mov",    $ctr->getMov());
-         $sql->bindValue(":date",   $ctr->getDate());         
-         $sql->bindValue(":type",   $ctr->getType());
-         $sql->bindValue(":source", $ctr->getSource());
-         $sql->bindValue(":form",   $ctr->getForm());
-         $sql->bindValue(":desc",   $ctr->getDesc());
-         $sql->bindValue(":value",  $ctr->getValue());
-         $sql->bindValue(":fk",     $ctr->getFkac());
+
+          
+         $sql->bindValue(":broker",   $ci->getBroker());
+         $sql->bindValue(":cat",      $ci->getCat());         
+         $sql->bindValue(":type",     $ci->getType());
+         $sql->bindValue(":open",     $ci->getOpen());
+         $sql->bindValue(":expery",   $ci->getExpery());
+         $sql->bindValue(":rateType", $ci->getRateType());
+         $sql->bindValue(":rate",     $ci->getRate());
+         $sql->bindValue(":value",    $ci->getValue());
+         $sql->bindValue(":desc",     $ci->getDesc());
+         $sql->bindValue(":status",   $ci->getStatus());
+         $sql->bindValue(":fk",       $ci->getFkac());
+         
+       
 
          if ( $sql->execute() ) {
-          $ctr->setMsg(" transactions ".$ctr->getType()." success ");
+          $ci->setMsg(" transactions ".$ci->getType()." success ");
           }else{
-          $ctr->setMsg("error");             
+          $ci->setMsg("error");             
          } 
 
     }
@@ -49,29 +55,80 @@ class M_Investments extends Conn
 
 
 
+
+
+
+
+
+
+
+    public function selectInvestmentsByAccount(C_Investments $ci):bool
+  {
+         $query = "SELECT
+                   tb_investments.id_ivt ,
+                   tb_investments.broker_name_ivt, 
+                   tb_investments.cat_ivt ,
+                   tb_investments.type_ivt ,
+                   tb_investments.open_ivt ,
+                   tb_investments.expery_ivt ,
+                   tb_investments.rate_type_ivt ,
+                   tb_investments.rate_ivt,
+                   tb_investments.value_ivt ,
+                   tb_investments.desc_ivt ,
+                   tb_investments.fk_bka  
+                   FROM tb_investments 
+                   INNER JOIN tb_bank_account ON (id_bka = fk_bka ) WHERE tb_bank_account.id_bka = :fkac";
+        
+         $sql = $this->pdo->prepare($query);
+         $sql->bindValue(':fkac', $ci->getFkac());               
+         $sql->execute();
+
+      if ($sql->rowCount() > 0) {
+
+          $list_investments = array();
+  
+          while ($investments = $sql->fetchAll(PDO::FETCH_ASSOC)) {
+               $list_investments = $investments;
+          }
+  
+          $ci->setList($list_investments);
+          return true;
+         
+      }else{   
+          $ci->setMsg("not found");
+          return false; 
+       }
+
+  }
+
+
+
+
+
+
     public function selectLastInvestment(C_Investments $ci):bool
     {
-        $query = "SELECT * FROM tb_transactions WHERE fk_bac=:fkac ORDER BY id_trs DESC LIMIT 1" ;
+        $query = "SELECT * FROM tb_investments WHERE fk_bka =:fkac ORDER BY id_ivt DESC LIMIT 1" ;
 
         $sql = $this->pdo->prepare($query); 
-        $sql->bindValue(":fkac",$ctr->getFkac());
+        $sql->bindValue(":fkac",$ci->getFkac());
         
         $sql->execute();
   
         if ($sql->rowCount() > 0) {
   
-          $registration_trs = array();
+          $registration_inv = array();
   
           while ($registration = $sql->fetchAll(PDO::FETCH_ASSOC)) {
-               $registration_trs = $registration;
+               $registration_inv = $registration;
           }
   
-          $ctr->setList($registration_trs);
+          $ci->setList($registration_inv);
           return true;
          
        }else{ 
   
-          $ctr->setMsg("not found");
+          $ci->setMsg("not found");
           return false; 
        }
   

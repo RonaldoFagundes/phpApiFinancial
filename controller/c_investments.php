@@ -14,10 +14,12 @@ class C_Investments
     private $rateType;
     private $rate;
     private $amount;
-    private $desc;
-    private $idac;
-
-
+    private $value;
+    private $desc;  
+    private $status;  
+    private $fkac;
+    private $list = [];
+    private $msg;
 
 
 
@@ -168,6 +170,24 @@ class C_Investments
 
 
 
+     /**
+     * Get the value of value
+     */
+    public function getValue()
+    {
+        return $this->value;
+    }
+
+    /**
+     * Set the value of value
+     */
+    public function setValue($value): self
+    {
+        $this->value = $value;
+
+        return $this;
+    }
+
 
     /**
      * Get the value of amount
@@ -212,21 +232,62 @@ class C_Investments
 
 
 
-
     /**
-     * Get the value of idac
+     * Get the value of status
      */
-    public function getIdac()
+    public function getStatus()
     {
-        return $this->idac;
+        return $this->status;
     }
 
     /**
-     * Set the value of idac
+     * Set the value of status
      */
-    public function setIdac($idac): self
+    public function setStatus($status): self
     {
-        $this->idac = $idac;
+        $this->status = $status;
+
+        return $this;
+    }
+
+   
+
+    /**
+     * Get the value of fkac
+     */
+    public function getFkac()
+    {
+        return $this->fkac;
+    }
+
+    /**
+     * Set the value of fkac
+     */
+    public function setFkac($fkac): self
+    {
+        $this->fkac = $fkac;
+
+        return $this;
+    }
+
+
+
+
+
+    /**
+     * Get the value of list
+     */
+    public function getList()
+    {
+        return $this->list;
+    }
+
+    /**
+     * Set the value of list
+     */
+    public function setList($list): self
+    {
+        $this->list = $list;
 
         return $this;
     }
@@ -236,9 +297,24 @@ class C_Investments
 
 
 
+    /**
+     * Get the value of msg
+     */
+    public function getMsg()
+    {
+        return $this->msg;
+    }
 
+    /**
+     * Set the value of msg
+     */
+    public function setMsg($msg): self
+    {
+        $this->msg = $msg;
 
+        return $this;
+    }
 
-
+    
 
 }

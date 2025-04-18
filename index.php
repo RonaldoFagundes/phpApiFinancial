@@ -273,7 +273,7 @@ if ($_GET['action'] === 'cadUser') {
         $data['transaction']['source'],
         $data['transaction']['form'],
         $data['transaction']['desc'],
-        $data['transaction']['value'],
+        $data['transaction']['valuet'],
         $data['transaction']['account'],
         $data['transaction']['number'],
         $data['transaction']['idac'],        
@@ -314,6 +314,8 @@ if ($_GET['action'] === 'cadUser') {
 }else if ($_GET['action'] === 'postInvestments') { 
   
     $array_investments = [                 
+        $data['investments']['trans'],
+        $data['investments']['form'],
         $data['investments']['broker'],
         $data['investments']['cat'],
         $data['investments']['type'],
@@ -321,12 +323,24 @@ if ($_GET['action'] === 'cadUser') {
         $data['investments']['expery'],
         $data['investments']['rateType'],
         $data['investments']['rate'],
-        $data['investments']['amount'],
+        $data['investments']['valuei'],
         $data['investments']['desc'],        
         $data['investments']['idac'],        
   ];
 
     echo json_encode($s_inv->investmentsData($data));
+
+}else if ($_GET['action'] === 'proofInvestment') {    
+   
+    $fkac = $data['fkac'];
+    echo json_encode($s_inv->proofInvestment($fkac));
+
+
+}else if ($_GET['action'] === 'listInvestmentsByAc'){
+
+    $idac = $data['idac'];  
+    echo json_encode($s_inv->listInvestmentsByAc($idac));
+
 
 }else if ($_GET['action'] === 'conect'){
 
