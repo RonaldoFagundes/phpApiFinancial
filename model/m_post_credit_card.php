@@ -173,7 +173,7 @@ class M_Post_Credit_Card extends Conn
 
   
 
-  public function selectAmount(C_Credit_Card $c_cc, C_Post_Credit_Card $cpcc)
+  public function selectAmount(C_Credit_Card $c_cc, C_Post_Credit_Card $cpcc):bool
   {
 
    //$query = "SELECT sum( tb_post_creditcard.value_pcc) AS value 

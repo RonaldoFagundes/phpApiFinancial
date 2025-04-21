@@ -5,22 +5,50 @@
 class C_Investments
 {
 
- 
+    private $id;
     private $broker;
     private $cat;
     private $type;
     private $open; 
     private $expery;
+    private $date;
     private $rateType;
-    private $rate;
+    private $rate;  
+    private $rateValue;  
     private $amount;
     private $value;
     private $desc;  
     private $status;  
-    private $fkac;
+    private $fkac;      
+    private $out;
     private $list = [];
     private $msg;
 
+
+     
+
+
+
+
+
+
+    /**
+     * Get the value of id
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set the value of id
+     */
+    public function setId($id): self
+    {
+        $this->id = $id;
+
+        return $this;
+    }
 
 
     /**
@@ -126,6 +154,23 @@ class C_Investments
 
 
 
+     /**
+     * Get the value of date
+     */
+    public function getDate()
+    {
+        return $this->date;
+    }
+
+    /**
+     * Set the value of date
+     */
+    public function setDate($date): self
+    {
+        $this->date = $date;
+
+        return $this;
+    }
 
 
     /**
@@ -168,6 +213,26 @@ class C_Investments
         return $this;
     }
 
+
+    /**
+     * Get the value of rateValue
+     */
+    public function getRateValue()
+    {
+        return $this->rateValue;
+    }
+
+
+    
+    /**
+     * Set the value of rateValue
+     */
+    public function setRateValue($rateValue): self
+    {
+        $this->rateValue = $rateValue;
+
+        return $this;
+    }
 
 
      /**
@@ -272,6 +337,26 @@ class C_Investments
 
 
 
+   
+     /**
+     * Get the value of out
+     */
+    public function getOut()
+    {
+        return $this->out;
+    }
+
+    /**
+     * Set the value of out
+     */
+    public function setOut($out): self
+    {
+        $this->out = $out;
+
+        return $this;
+    }
+
+
 
 
     /**
@@ -317,4 +402,13 @@ class C_Investments
 
     
 
+   
+
+   
+
+    
+
+    
+
+    
 }

@@ -314,6 +314,7 @@ if ($_GET['action'] === 'cadUser') {
 }else if ($_GET['action'] === 'postInvestments') { 
   
     $array_investments = [                 
+        $data['investments']['move'],
         $data['investments']['trans'],
         $data['investments']['form'],
         $data['investments']['broker'],
@@ -321,7 +322,7 @@ if ($_GET['action'] === 'cadUser') {
         $data['investments']['type'],
         $data['investments']['open'],        
         $data['investments']['expery'],
-        $data['investments']['rateType'],
+        $data['investments']['rate_type'],
         $data['investments']['rate'],
         $data['investments']['valuei'],
         $data['investments']['desc'],        
@@ -335,11 +336,62 @@ if ($_GET['action'] === 'cadUser') {
     $fkac = $data['fkac'];
     echo json_encode($s_inv->proofInvestment($fkac));
 
-
 }else if ($_GET['action'] === 'listInvestmentsByAc'){
 
     $idac = $data['idac'];  
     echo json_encode($s_inv->listInvestmentsByAc($idac));
+
+
+}else if ($_GET['action'] === 'postRescue') { 
+  
+    $array_investments = [                 
+        $data['investments']['move'],
+        $data['investments']['trans'],
+        $data['investments']['form'],
+        $data['investments']['broker'],
+        $data['investments']['cat'],
+        $data['investments']['type'],
+        $data['investments']['open'],        
+        $data['investments']['expery'],
+        $data['investments']['date'],
+        $data['investments']['rate_type'],
+        $data['investments']['rate'],        
+        $data['investments']['valuei'],
+        $data['investments']['valuet'],
+        $data['investments']['rate_value'],
+        $data['investments']['desc'],        
+        $data['investments']['status'],
+        $data['investments']['idac'],        
+        $data['investments']['id'],
+  ];
+
+    echo json_encode($s_inv->investmentsData($data));
+
+
+}else if ($_GET['action'] === 'proofRescue') {    
+     
+    $id = $data['id'];       
+    echo json_encode($s_inv->proofRescue($id));
+
+}else if ($_GET['action'] === 'postRendimentos') { 
+  
+    /*
+    $array_profitability = [                 
+        $data['profitability']['id'],
+        $data['profitability']['value'],         
+        $data['profitability']['date'],    
+    ];
+   */
+  
+   // $array_profitability = [ $data['profitability']];  
+
+    echo json_encode($s_inv->postRendimentos($data['profitability']));
+   // echo json_encode($s_inv->postRendimentos($array_investments, $data));
+
+}else if ($_GET['action'] === 'amountProfitability'){
+
+    $id = $data['id'];
+    echo json_encode($s_inv->getAmountProfitability($id));   
 
 
 }else if ($_GET['action'] === 'conect'){
