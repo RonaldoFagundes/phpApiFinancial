@@ -65,18 +65,21 @@ class S_Investments {
     public function investmentsData($data)
     { 
       
-      
    
       $this->c_trs->setMov($data['investments']['move']);    
-      $this->c_trs->setDate($data['investments']['open']);
+      //$this->c_trs->setDate($data['investments']['open']);
       $this->c_trs->setType($data['investments']['trans']);      
       $this->c_trs->setSource($data['investments']['broker']);   
       $this->c_trs->setForm($data['investments']['form']);      
       $this->c_trs->setDesc($data['investments']['desc']); 
-      $this->c_trs->setFkac($data['investments']['idac']);               
+      $this->c_trs->setFkac($data['investments']['idac']); 
+      
+      $this->c_inv->setValue($data['investments']['valuei']);
+
           
-     if( $data['investments']['move'] == "out"){    
-       
+     if( $data['investments']['move'] == "out"){
+      
+      $this->c_trs->setDate($data['investments']['open']);       
       $this->c_trs->setValue($data['investments']['valuei']);
 
       $this->c_inv->setBroker($data['investments']['broker']);
@@ -86,7 +89,7 @@ class S_Investments {
       $this->c_inv->setExpery($data['investments']['expery']);
       $this->c_inv->setRateType($data['investments']['rate_type']);
       $this->c_inv->setRate($data['investments']['rate']);
-      $this->c_inv->setValue($data['investments']['valuei']);
+     // $this->c_inv->setValue($data['investments']['valuei']);
       $this->c_inv->setDesc($data['investments']['desc']);        
       $this->c_inv->setStatus($data['investments']['status']); 
       $this->c_inv->setFkac($data['investments']['idac']);           
@@ -101,24 +104,22 @@ class S_Investments {
         $this->c_trs->setValue($data['investments']['valuet']); 
 
         $this->c_inv->setOut(true);
-        $this->c_inv->setValue($data['investments']['valuei']);
+        //$this->c_inv->setValue($data['investments']['valuei']);
         $this->c_inv->setRateValue($data['investments']['rate_value']);
         $this->c_inv->setId($data['investments']['id']); 
         $this->c_inv->setDate($data['investments']['date']);
-
         
         $this->m_inv->insertProfitability($this->c_inv); 
         $this->m_inv->updateInvestment($this->c_inv);
-        $this->m_trs->insertTransactions($this->c_trs);
-        
+        $this->m_trs->insertTransactions($this->c_trs);        
 
         return $this->c_trs->getMsg()." and ".$this->c_inv->getMsg();  
       
      }
-    
+   
 
 
-      //return $data;
+     // return $data;
     }
 
    
