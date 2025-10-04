@@ -6,7 +6,10 @@ header("Access-Control-Allow-Methods: GET, POST, PATCH, PUT, DELETE, OPTIONS");
 header("Access-Control-Allow-Headers: Content-Type, Accept, Authorization, X-Requested-With, X-Auth-Token, Origin, Application");
 header("Content-Type: application/json; charset=utf-8");
 
+echo json_encode("api vercel working");
 
+
+/*
 include 'service/s_user.php';
 include 'service/s_bank.php';
 include 'service/s_account.php';
@@ -260,13 +263,13 @@ if ($_GET['action'] === 'cadUser') {
   
 }else if ($_GET['action'] === 'deletePostCreditCard') {
 
-       /*
+       //
         $creditCard = [
               $data['creditCard']['id']
         ];
         echo json_encode($ccps->deletePost($data)); 
      
-       */ 
+       // 
       
 }else if ($_GET['action'] === 'postTransaction') {  
         
@@ -379,13 +382,13 @@ if ($_GET['action'] === 'cadUser') {
 
 }else if ($_GET['action'] === 'postRendimentos') { 
   
-    /*
+    //
     $array_profitability = [                 
         $data['profitability']['id'],
         $data['profitability']['value'],         
         $data['profitability']['date'],    
     ];
-   */
+   //
   
    // $array_profitability = [ $data['profitability']];  
 
@@ -403,11 +406,9 @@ if ($_GET['action'] === 'cadUser') {
       $res = http_response_code(200);
       echo json_encode($res);
 
-}else if ($_GET['action'] === 'test'){
-        echo" api working now";
 }
 
-   
+*/ 
 
 
 
