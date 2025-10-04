@@ -1,7 +1,7 @@
 <?php
 
-include 'controller/c_transactions.php';
-include 'model/m_transactions.php';
+include './controller/c_transactions.php';
+include './model/m_transactions.php';
 
 //include 'controller/c_cash_mov.php';
 //include 'model/m_cash_mov.php';

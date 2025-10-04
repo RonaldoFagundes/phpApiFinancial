@@ -1,7 +1,7 @@
 <?php
 
-include 'controller/c_bank.php';
-include 'model/m_bank.php';
+include './controller/c_bank.php';
+include './model/m_bank.php';
 
  class S_Bank {
 

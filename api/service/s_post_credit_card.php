@@ -1,7 +1,7 @@
 <?php
 
-include 'controller/c_post_credit_card.php';
-include 'model/m_post_credit_card.php';
+include './controller/c_post_credit_card.php';
+include './model/m_post_credit_card.php';
 //include 'controller/c_credit_card.php';
 
 

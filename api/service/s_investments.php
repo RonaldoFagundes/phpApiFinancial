@@ -3,8 +3,8 @@
 //include 'controller/c_transactions.php';
 //include 'model/m_transactions.php';
 
-include 'controller/c_investments.php';
-include 'model/m_investments.php';
+include './controller/c_investments.php';
+include './model/m_investments.php';
 
 
 

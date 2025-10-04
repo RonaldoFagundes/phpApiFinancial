@@ -1,7 +1,7 @@
 <?php
 
-include 'controller/c_account.php';
-include 'model/m_account.php';
+include './controller/c_account.php';
+include './model/m_account.php';
 
  class S_Account {
 
