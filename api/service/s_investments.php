@@ -3,9 +3,11 @@
 //include 'controller/c_transactions.php';
 //include 'model/m_transactions.php';
 
-include './controller/c_investments.php';
-include './model/m_investments.php';
+//include '/controller/c_investments.php';
+//include '/model/m_investments.php';
 
+require_once ROOT_PATH . "/controller/c_investments.php";
+require_once ROOT_PATH . "/model/m_investments.php";
 
 
 class S_Investments {

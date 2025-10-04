@@ -2,7 +2,7 @@
 
 
 require_once 'conn.php';
-
+//require_once ROOT_PATH . "conn.php";
 
 
 class M_Cash_Mov extends Conn

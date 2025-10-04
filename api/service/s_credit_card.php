@@ -1,7 +1,10 @@
 <?php
 
-include './controller/c_credit_card.php';
-include './model/m_credit_card.php';
+//include 'controller/c_credit_card.php';
+//include 'model/m_credit_card.php';
+
+require_once ROOT_PATH . "/controller/c_credit_card.php";
+require_once ROOT_PATH . "/model/m_credit_card.php";
 
  class S_Credit_Card {
 

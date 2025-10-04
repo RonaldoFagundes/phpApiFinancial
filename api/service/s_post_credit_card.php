@@ -1,9 +1,12 @@
 <?php
 
-include './controller/c_post_credit_card.php';
-include './model/m_post_credit_card.php';
+//include '/controller/c_post_credit_card.php';
+//include '/model/m_post_credit_card.php';
+
 //include 'controller/c_credit_card.php';
 
+require_once ROOT_PATH . "/controller/c_post_credit_card.php";
+require_once ROOT_PATH . "/model/m_post_credit_card.php";
 
 
  class S_Post_Credit_Card {

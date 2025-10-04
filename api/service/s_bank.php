@@ -1,7 +1,11 @@
 <?php
 
-include './controller/c_bank.php';
-include './model/m_bank.php';
+//include 'controller/c_bank.php';
+//include 'model/m_bank.php';
+
+require_once ROOT_PATH . "/controller/c_bank.php";
+require_once ROOT_PATH . "/model/m_bank.php";
+
 
  class S_Bank {
 

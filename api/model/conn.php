@@ -1,6 +1,8 @@
 <?php
 
-require_once './credencials.php';
+//require_once './credencials.php';
+require_once ROOT_PATH . "/credencials.php";
+
 
 class Conn
 {

@@ -1,8 +1,10 @@
 <?php
 
-include './controller/c_cash_mov.php';
-include './model/m_cash_mov.php';
+//include 'controller/c_cash_mov.php';
+//include 'model/m_cash_mov.php';
 
+require_once ROOT_PATH . "/controller/c_cash_mov.php";
+require_once ROOT_PATH . "/model/m_cash_mov.php";
 
 class S_Cash_Mov {
 
