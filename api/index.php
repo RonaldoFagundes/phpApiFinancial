@@ -402,6 +402,9 @@ if ($_GET['action'] === 'cadUser') {
 
       $res = http_response_code(200);
       echo json_encode($res);
+
+}else if ($_GET['action'] === 'test'){
+        echo" api working now";
 }
 
    
