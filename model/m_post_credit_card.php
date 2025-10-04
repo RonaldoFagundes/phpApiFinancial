@@ -108,6 +108,7 @@ class M_Post_Credit_Card extends Conn
       tb_post_creditcard.date_pcc ,
       tb_post_creditcard.value_pcc ,
       tb_post_creditcard.desc_pcc ,
+      tb_post_creditcard.parcel_pcc ,
       tb_creditcard.format_cc ,
       tb_post_creditcard.expery_date_pcc          
       FROM tb_post_creditcard 

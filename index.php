@@ -41,6 +41,10 @@ if ($_GET['action'] === 'cadUser') {
     
     echo json_encode($s_user->cadUserData($data)); 
 
+}else if ($_GET['action'] === 'users'){
+
+    echo json_encode($s_user->listUsers());
+
 }else if ($_GET['action'] === 'cadBank'){
 
     $array_bank = [

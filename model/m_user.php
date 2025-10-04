@@ -33,6 +33,29 @@ class M_User extends Conn
     }
 
 
+
+    public function selectUsers(C_User $c_user):bool
+    {
+      $query = "SELECT * from tb_users" ;
+      $sql = $this->pdo->prepare($query);    
+      $sql->execute();
+
+      if ($sql->rowCount() > 0) {
+
+        $list_users = array();
+
+        while ($users = $sql->fetchAll(PDO::FETCH_ASSOC)) {
+             $list_users = $users;
+        }
+
+        $c_user->setList($list_users);
+        return true;       
+     }else { 
+        $c_user->setMsg("not found");
+        return false; 
+    }
+
+  }
   
  
 

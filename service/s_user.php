@@ -25,5 +25,17 @@ include 'model/m_user.php';
      }
 
 
+     public function listUsers()
+     { 
+        
+      if ( $this->m_user->selectUsers($this->c_user) ) {
+           return $this->c_user->getList();
+      }else{
+           return $this->c_user->getMsg();
+      }
+
+     }
+
+
 
  }
