@@ -6,10 +6,6 @@ header("Access-Control-Allow-Methods: GET, POST, PATCH, PUT, DELETE, OPTIONS");
 header("Access-Control-Allow-Headers: Content-Type, Accept, Authorization, X-Requested-With, X-Auth-Token, Origin, Application");
 header("Content-Type: application/json; charset=utf-8");
 
-echo json_encode("api vercel working");
-
-
-/*
 include 'service/s_user.php';
 include 'service/s_bank.php';
 include 'service/s_account.php';
@@ -27,8 +23,6 @@ $s_pcc     = new S_Post_Credit_Card();
 $s_t       = new S_Transactions();
 $s_cm      = new S_Cash_Mov();
 $s_inv     = new S_Investments();
-
-
 
 $response_json = file_get_contents("php://input");
 $data = json_decode($response_json, true);
@@ -111,7 +105,6 @@ if ($_GET['action'] === 'cadUser') {
     $idBank = $data['idBank'];  
     echo json_encode($s_account->listAccountByBank($idBank));
 
-
 }else if ($_GET['action'] === 'listAccountByBankIgnoreId'){
 
     $array_account = [
@@ -119,8 +112,7 @@ if ($_GET['action'] === 'cadUser') {
         $data['surchAccount']['fkbnk'],
       ];
 
-    echo json_encode($s_account->listAccountByBankIgnoreId($data));  
-    
+    echo json_encode($s_account->listAccountByBankIgnoreId($data));     
     
 }else if ($_GET['action'] === 'listAccountType'){
 
@@ -263,13 +255,12 @@ if ($_GET['action'] === 'cadUser') {
   
 }else if ($_GET['action'] === 'deletePostCreditCard') {
 
-       //
+       /*
         $creditCard = [
               $data['creditCard']['id']
         ];
         echo json_encode($ccps->deletePost($data)); 
-     
-       // 
+        */ 
       
 }else if ($_GET['action'] === 'postTransaction') {  
         
@@ -294,7 +285,6 @@ if ($_GET['action'] === 'cadUser') {
     $fkac = $data['fkac'];
     echo json_encode($s_t->proofTransaction($fkac));
 
-
 }else if ($_GET['action'] === 'postCashMov') {
     
     $array_cashMov = [                 
@@ -316,7 +306,6 @@ if ($_GET['action'] === 'cadUser') {
 }else if ($_GET['action'] === 'cashAmount') {    
    
     echo json_encode($s_cm->cashAmount());
-
 
 }else if ($_GET['action'] === 'postInvestments') { 
   
@@ -348,7 +337,6 @@ if ($_GET['action'] === 'cadUser') {
     $idac = $data['idac'];  
     echo json_encode($s_inv->listInvestmentsByAc($idac));
 
-
 }else if ($_GET['action'] === 'postRescue') { 
   
     $array_investments = [                 
@@ -374,7 +362,6 @@ if ($_GET['action'] === 'cadUser') {
 
     echo json_encode($s_inv->investmentsData($data));
 
-
 }else if ($_GET['action'] === 'proofRescue') {    
      
     $id = $data['id'];       
@@ -382,13 +369,13 @@ if ($_GET['action'] === 'cadUser') {
 
 }else if ($_GET['action'] === 'postRendimentos') { 
   
-    //
+    /*
     $array_profitability = [                 
         $data['profitability']['id'],
         $data['profitability']['value'],         
         $data['profitability']['date'],    
     ];
-   //
+   */
   
    // $array_profitability = [ $data['profitability']];  
 
@@ -398,17 +385,18 @@ if ($_GET['action'] === 'cadUser') {
 }else if ($_GET['action'] === 'amountProfitability'){
 
     $id = $data['id'];
-    echo json_encode($s_inv->getAmountProfitability($id));   
-
+    echo json_encode($s_inv->getAmountProfitability($id));  
 
 }else if ($_GET['action'] === 'conect'){
 
       $res = http_response_code(200);
       echo json_encode($res);
 
+}else if ($_GET['action'] === 'test'){
+      echo json_encode("api working!!!"); 
 }
 
-*/ 
+
 
 
 
@@ -420,13 +408,11 @@ if ($_GET['action'] === 'cadUser') {
 /*
 
   $creditCard = [
-            $dados['cadCreditCard']['number'],  
+      $dados['cadCreditCard']['number'],  
       ];
-      // echo json_encode($dados['creditCard']['type']);
-      echo json_encode($ccs->cadCreditCardData($dados));
-      //echo json_encode($creditCard); 
-
-
+       //echo json_encode($dados['creditCard']['type']);
+         echo json_encode($ccs->cadCreditCardData($dados));
+       //echo json_encode($creditCard); 
 
  $creditCard= [  
  
