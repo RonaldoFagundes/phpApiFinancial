@@ -8,16 +8,14 @@ header("Content-Type: application/json; charset=utf-8");
 
 define('ROOT_PATH', dirname(__FILE__));
 
-//$response_json = file_get_contents("php://input");
-//$data = json_decode($response_json, true);
-
-
+/*
 if ($_GET['action'] === 'user') {
 
    echo json_encode("test phpApiFinancial");
 }
+*/
 
-/*
+
 include 'service/s_user.php';
 include 'service/s_bank.php';
 include 'service/s_account.php';
@@ -36,9 +34,20 @@ $s_t       = new S_Transactions();
 $s_cm      = new S_Cash_Mov();
 $s_inv     = new S_Investments();
 
-$response_json = file_get_contents("php://input");
-$data = json_decode($response_json, true);
 
+//$response_json = file_get_contents("php://input");
+//$data = json_decode($response_json, true);
+
+ if ($_GET['action'] === 'users'){
+
+    echo json_encode($s_user->listUsers());
+
+}
+
+
+
+
+/*
 if ($_GET['action'] === 'cadUser') {
 	
       $array_user = [
