@@ -8,8 +8,8 @@ header("Content-Type: application/json; charset=utf-8");
 
 define('ROOT_PATH', dirname(__FILE__));
 
-$response_json = file_get_contents("php://input");
-$data = json_decode($response_json, true);
+//$response_json = file_get_contents("php://input");
+//$data = json_decode($response_json, true);
 
 
 if ($_GET['action'] === 'user') {
