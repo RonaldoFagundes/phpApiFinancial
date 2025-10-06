@@ -8,13 +8,6 @@ header("Content-Type: application/json; charset=utf-8");
 
 define('ROOT_PATH', dirname(__FILE__));
 
-/*
-if ($_GET['action'] === 'user') {
-
-   echo json_encode("test phpApiFinancial");
-}
-*/
-
 
 include 'service/s_user.php';
 include 'service/s_bank.php';
@@ -38,16 +31,10 @@ $s_inv     = new S_Investments();
 //$response_json = file_get_contents("php://input");
 //$data = json_decode($response_json, true);
 
- if ($_GET['action'] === 'users'){
-
-    echo json_encode($s_user->listUsers());
-
-}
+ 
+$data = json_decode(file_get_contents('php://input'));
 
 
-
-
-/*
 if ($_GET['action'] === 'cadUser') {
 	
       $array_user = [
@@ -275,14 +262,13 @@ if ($_GET['action'] === 'cadUser') {
       echo json_encode($s_pcc->amountDataByUser($data));   
   
 }else if ($_GET['action'] === 'deletePostCreditCard') {
-
-       /
+       
         $creditCard = [
               $data['creditCard']['id']
         ];
         echo json_encode($ccps->deletePost($data)); 
-        */ 
-  /*    
+         
+     
 }else if ($_GET['action'] === 'postTransaction') {  
         
     $array_transaction = [                 
@@ -390,19 +376,19 @@ if ($_GET['action'] === 'cadUser') {
 
 }else if ($_GET['action'] === 'postRendimentos') { 
   
-    /
+    
     $array_profitability = [                 
         $data['profitability']['id'],
         $data['profitability']['value'],         
         $data['profitability']['date'],    
     ];
-   */
+   
   
    // $array_profitability = [ $data['profitability']];  
 
-    //echo json_encode($s_inv->postRendimentos($data['profitability']));
+    echo json_encode($s_inv->postRendimentos($data['profitability']));
    // echo json_encode($s_inv->postRendimentos($array_investments, $data));
-/*
+
 }else if ($_GET['action'] === 'amountProfitability'){
 
     $id = $data['id'];
@@ -416,7 +402,7 @@ if ($_GET['action'] === 'cadUser') {
 }else if ($_GET['action'] === 'test'){
       echo json_encode("api working!!!"); 
 }
-*/
+
 
 
 
