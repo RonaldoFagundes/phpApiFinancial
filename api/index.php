@@ -32,8 +32,8 @@ $s_inv     = new S_Investments();
 //$data = json_decode($response_json, true);
 
  
-$data = json_decode(file_get_contents('php://input'));
-
+//$data = json_decode(file_get_contents('php://input'));
+$data = json_decode(file_get_contents('php://input'), true);
 
 if ($_GET['action'] === 'cadUser') {
 	
