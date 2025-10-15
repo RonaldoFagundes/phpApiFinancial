@@ -112,6 +112,11 @@ if ($_GET['action'] === 'cadUser') {
 
     $idBank = $data['idBank'];  
     echo json_encode($s_account->listAccountByBank($idBank));
+/*
+}else if ($_GET['action'] === 'listAccountByBank'){  
+    $idBank = $_GET['idBank'];     
+    echo json_encode($s_account->listAccountByBank($idBank));
+*/
 
 }else if ($_GET['action'] === 'listAccountByBankIgnoreId'){
 
