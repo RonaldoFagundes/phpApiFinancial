@@ -110,8 +110,7 @@ if ($_GET['action'] === 'cadUser') {
 
 }else if ($_GET['action'] === 'listAccountByBank'){
 
-    $idBank = 5;  
-   // $idBank = $data['idBank'];  
+    $idBank = $data['idBank'];  
     echo json_encode($s_account->listAccountByBank($idBank));
 /*
 }else if ($_GET['action'] === 'listAccountByBank'){  
