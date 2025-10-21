@@ -6,25 +6,6 @@ header("Access-Control-Allow-Methods: GET, POST, PATCH, PUT, DELETE, OPTIONS");
 header("Access-Control-Allow-Headers: Content-Type, Accept, Authorization, X-Requested-With, X-Auth-Token, Origin, Application");
 header("Content-Type: application/json; charset=utf-8");
 
-
-if ($_GET['action'] === 'listBank'){
-
-    $bancs = [
-     "id_bnk"=> 1 ,
-    "number_bnk"=> "104",
-    "name_bnk"=> "Caixa Econômica Federal",
-    "ein_bnk"=> "00.360.305/0001-04",
-    "contact_bnk"=> "https://www.caixa.gov.br",
-    "desc_bnk"=> "Banco Múltiplo",
-    "img_bnk"=> "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"
-    ];
-
-    echo json_encode($bancs); 
-     
-}
-
-
-/*
 define('ROOT_PATH', dirname(__FILE__));
 
 
@@ -131,11 +112,11 @@ if ($_GET['action'] === 'cadUser') {
 
     $idBank = $data['idBank'];  
     echo json_encode($s_account->listAccountByBank($idBank));
-//
+/*
 }else if ($_GET['action'] === 'listAccountByBank'){  
     $idBank = $_GET['idBank'];     
     echo json_encode($s_account->listAccountByBank($idBank));
-//
+*/
 
 }else if ($_GET['action'] === 'listAccountByBankIgnoreId'){
 
