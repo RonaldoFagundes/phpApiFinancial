@@ -166,7 +166,7 @@ class M_Account extends Conn
                    tb_bank_account.desc_bka ,
                    tb_bank_account.fk_bank  
                    FROM tb_bank 
-                   INNER JOIN tb_bank_account ON (fk_bank = id_bnk ) WHERE tb_bank_account.fk_bank  = 5";                   
+                   INNER JOIN tb_bank_account ON (fk_bank = id_bnk ) WHERE tb_bank_account.fk_bank = :fkbnk";                   
          $sql = $this->pdo->prepare($query);
          $sql->bindValue(':fkbnk', $c_account->getFkbank());               
          $sql->execute();
