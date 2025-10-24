@@ -8,29 +8,20 @@ header("Content-Type: application/json; charset=utf-8");
 
 $data = json_decode(file_get_contents('php://input'), true);
 
-
-if($_GET['action'] === 'login'){
-    
-    
-     $login = [
+if($_GET['action'] === 'login'){   
+      $login = [
       $data['credencials']['name'],  
       $data['credencials']['password'],     
-    ];
-   
-     $password = "12345678";
-
+    ];   
+    $password = "12345678";
     if($data['credencials']['password'] == $password ){
         echo json_encode($data['credencials']['name']);
     }else{
         echo json_encode("error");  
-    }
-    
-
-}else if ($_GET['action'] === 'listBank'){
-    
- 
-  $bancs=[
-      [
+    }  
+}else if ($_GET['action'] === 'listBank'){    
+ $bancs=[
+    [
         "id_bnk"=> 1 ,
         "number_bnk"=> "104",
         "name_bnk"=> "Caixa Econômica Federal",
@@ -47,17 +38,93 @@ if($_GET['action'] === 'login'){
             "type_act"=>"Corrente",
             "saldo_act"=>1598.63,
             "desc_act"=>"Salário",
-            ],            
+            "reports"=>[
+              [
+                "id_rpt"=>1,
+                "date_rpt"=>"2025/09/07",
+                "desc_rpt"=>"pgto light",
+                "value_rpt"=>112.96
+              ],
+              [
+                "id_rpt"=>2,
+                "date_rpt"=>"2025/09/10",
+                "desc_rpt"=>"pgto visa",
+                "value_rpt"=>874.23
+              ]
+              ],
+
+              "creditcard"=>[
+              [
+                "id_ccr"=>1,
+                "number_ccr"=>"5201 2367 4891 7149",
+                "type_ccr"=>"mastercard",
+                "format_ccr"=>"Fisico",
+                "desc_ccr"=>"Master free",
+                "fromDate_ccr"=>"2021/04/07",
+                "expiry_ccr"=>"2028/01",
+                "due_ccr"=>"10",               
+                "limit_ccr"=>5000.00,
+                "posts"=>[
+                   [
+                    "id_pst"=>1,
+                    "date_pst"=>"2025/10/12",
+                    "shop_pst"=>"Guanabara",
+                    "parcel_pst"=>"1/1",
+                    "desc_pst"=>"Alimentação",
+                    "value_pst"=>187.49
+                   ],
+                   [
+                    "id_pst"=>2,
+                    "date_pst"=>"2025/10/04",
+                    "shop_pst"=>"Venancio",
+                    "parcel_pst"=>"1/2",
+                    "desc_pst"=>"Medicação",
+                    "value_pst"=>36.90
+                   ],
+                   [
+                    "id_pst"=>3,
+                    "date_pst"=>"2025/10/23",
+                    "shop_pst"=>"Shopee",
+                    "parcel_pst"=>"1/5",
+                    "desc_pst"=>"Suplementos",
+                    "value_pst"=>24.73
+                   ],
+                   [
+                    "id_pst"=>4,
+                    "date_pst"=>"2025/10/22",
+                    "shop_pst"=>"Assai",
+                    "parcel_pst"=>"1/1",
+                    "desc_pst"=>"Alimentação",
+                    "value_pst"=>84.72
+                   ],                   
+                ] 
+              ],                            
+            ]
+           ],         
+            
             [
-            "id_act"=>2,
-            "number_act"=>"5792344-5",
-            "type_act"=>"Poupança",
-            "saldo_act"=>998.27,
-            "desc_act"=>"Economias",
+             "id_act"=>2,
+             "number_act"=>"5792344-5",
+             "type_act"=>"Poupança",
+             "saldo_act"=>998.27,
+             "desc_act"=>"Economias",
+             "reports"=>[ 
+                   [
+                    "id_rpt"=>1,
+                    "date_rpt"=>"2025/01/27",
+                    "desc_rpt"=>"recebimento pix",
+                    "value_rpt"=>800.00
+                   ],
+                   [
+                    "id_rpt"=>2,
+                    "date_rpt"=>"2025/06/15",
+                    "desc_rpt"=>"envio pix",
+                    "value_rpt"=>500.00
+                   ]
+                ],
             ],
         ]
     ],
-
 
     [
     "id_bnk"=> 2,
@@ -101,28 +168,10 @@ if($_GET['action'] === 'login'){
         ]
      ]
 
-    ];
-   
-
+    ]; 
 
     $json_string = json_encode($bancs); 
-    echo $json_string;
-
-     
-
-     
-}else if ($_GET['action'] === 'cadBank'){
-
-    $array_bank = [
-      $data['bank']['number'],  
-      $data['bank']['name'],  
-      $data['bank']['ein'],  
-      $data['bank']['contact'],
-      $data['bank']['desc'],
-      $data['bank']['base64'],
-    ];
-
-    echo json_encode($data);
+    echo $json_string;  
 }
 
 
@@ -131,7 +180,6 @@ if($_GET['action'] === 'login'){
 
 /*
 define('ROOT_PATH', dirname(__FILE__));
-
 
 include 'service/s_user.php';
 include 'service/s_bank.php';
@@ -151,31 +199,23 @@ $s_t       = new S_Transactions();
 $s_cm      = new S_Cash_Mov();
 $s_inv     = new S_Investments();
 
-
 //$response_json = file_get_contents("php://input");
 //$data = json_decode($response_json, true);
-
  
 //$data = json_decode(file_get_contents('php://input'));
 $data = json_decode(file_get_contents('php://input'), true);
 
-if ($_GET['action'] === 'cadUser') {
-	
+if ($_GET['action'] === 'cadUser') {	
       $array_user = [
           $data['user']['name'],  
           $data['user']['email'],  
           $data['user']['password'],  
           $data['user']['profile'],
-    ];
-    
+    ];    
     echo json_encode($s_user->cadUserData($data)); 
-
 }else if ($_GET['action'] === 'users'){
-
     echo json_encode($s_user->listUsers());
-
 }else if ($_GET['action'] === 'cadBank'){
-
     $array_bank = [
       $data['bank']['number'],  
       $data['bank']['name'],  
@@ -184,15 +224,10 @@ if ($_GET['action'] === 'cadUser') {
       $data['bank']['desc'],
       $data['bank']['base64'],
     ];
-
     echo json_encode($s_bank->cadBankData($data));
-
 }else if ($_GET['action'] === 'listBank'){
-
     echo json_encode($s_bank->listBank());  
-
 }else if ($_GET['action'] === 'updateBank'){
-
     $array_bank = [
         $data['bank']['id'],
         $data['bank']['number'],  
@@ -201,17 +236,12 @@ if ($_GET['action'] === 'cadUser') {
         $data['bank']['contact'],
         $data['bank']['desc'],
         $data['bank']['base64'],
-      ];
-  
+      ];  
     echo json_encode($s_bank->updateBankData($data));
-
 } else if ($_GET['action'] === 'deleteBank') { 
-
     $id = $data['id'];     
     echo json_encode($s_bank->deleteBank($id));
-
-}else if ($_GET['action'] === 'cadAccount'){
-   
+}else if ($_GET['action'] === 'cadAccount'){   
     $array_account = [
       $data['account']['number'],  
       $data['account']['type'],  
@@ -220,20 +250,13 @@ if ($_GET['action'] === 'cadUser') {
       $data['account']['amount'],
       $data['account']['fkbnk'],
     ];
-
     echo json_encode($s_account->cadAccountData($data));
-
 }else if ($_GET['action'] === 'listAccount'){
-
     echo json_encode($s_account->listAccount());
-
 }else if ($_GET['action'] === 'listAccountById'){
-
     $id = $data['id'];
     echo json_encode($s_account->listAccountById($id));
-
 }else if ($_GET['action'] === 'listAccountByBank'){
-
     $idBank = $data['idBank'];  
     echo json_encode($s_account->listAccountByBank($idBank));
 //
@@ -241,27 +264,18 @@ if ($_GET['action'] === 'cadUser') {
     $idBank = $_GET['idBank'];     
     echo json_encode($s_account->listAccountByBank($idBank));
 //
-
 }else if ($_GET['action'] === 'listAccountByBankIgnoreId'){
-
     $array_account = [
         $data['surchAccount']['id'],
         $data['surchAccount']['fkbnk'],
       ];
-
-    echo json_encode($s_account->listAccountByBankIgnoreId($data));     
-    
+    echo json_encode($s_account->listAccountByBankIgnoreId($data));      
 }else if ($_GET['action'] === 'listAccountType'){
-
    echo json_encode($s_account->listAccountType());
-
 }else if ($_GET['action'] === 'amountAccountById'){
-
     $id = $data['id'];
-    echo json_encode($s_account->getAmountById($id));   
-
-}else if ($_GET['action'] === 'updateAccount'){
-   
+    echo json_encode($s_account->getAmountById($id));  
+}else if ($_GET['action'] === 'updateAccount'){   
     $array_account = [
       $data['account']['id'],  
       $data['account']['number'],
@@ -271,16 +285,11 @@ if ($_GET['action'] === 'cadUser') {
       $data['account']['amount'],
       $data['account']['fkbnk'],
     ];
-
     echo json_encode($s_account->updateAccountData($data));
-
 }else if ($_GET['action'] === 'deleteAccount') { 
-
       //  $id = $data['id'];     
-    echo json_encode("not exist"); 
-        
-}else if ($_GET['action'] === 'cadCreditCard'){
-   
+    echo json_encode("not exist");         
+}else if ($_GET['action'] === 'cadCreditCard'){   
         $array_cadCreditCard = [
           $data['cadCreditCard']['number'],
           $data['cadCreditCard']['type'],  
@@ -291,12 +300,9 @@ if ($_GET['action'] === 'cadUser') {
           $data['cadCreditCard']['due'],
           $data['cadCreditCard']['limit'],
           $data['cadCreditCard']['idac'],
-        ];
-    
+        ];    
     echo json_encode($s_cc->cadCreditCardData($data)); 
-
-}else if ($_GET['action'] === 'updateCreditCard'){
-   
+}else if ($_GET['action'] === 'updateCreditCard'){   
     $array_cadCreditCard = [
       $data['cadCreditCard']['id'],
       $data['cadCreditCard']['number'],
@@ -309,16 +315,11 @@ if ($_GET['action'] === 'cadUser') {
       $data['cadCreditCard']['limit'],
       $data['cadCreditCard']['idac'],
     ];
-
-    echo json_encode($s_cc->cadCreditCardData($data)); 
-    
+    echo json_encode($s_cc->cadCreditCardData($data));     
 }else if ($_GET['action'] === 'creditCardByAccount'){
-
     $id = $data['id']; 
-    echo json_encode($s_cc->listCreditCardByAccount($id));         
-
+    echo json_encode($s_cc->listCreditCardByAccount($id));   
 }else if ($_GET['action'] === 'postCreditCard') {
-
         $array_post_creditCard = [                 
               $data['postCreditCard']['placeshop'],
               $data['postCreditCard']['date'],
@@ -332,16 +333,10 @@ if ($_GET['action'] === 'cadUser') {
         // echo json_encode($dados['creditCard']['type']);
         //echo json_encode($creditCard);
     echo json_encode($s_pcc->postCreditCardData($data));
-
-
 }else if ($_GET['action'] === 'proofPostCreditCard') {
-
     $fkac = $data['fkac']; 
-    echo json_encode($s_pcc->proofPostCreditCard($fkac));
-
-  
+    echo json_encode($s_pcc->proofPostCreditCard($fkac));  
 } else if ($_GET['action'] === 'listPostByCreditCard') {
-
         //$id = $data['id'];     
         $array_surch = [                 
            // $data['surch']['fkcc'],
@@ -351,9 +346,7 @@ if ($_GET['action'] === 'cadUser') {
         ];
         echo json_encode($s_pcc->listPostsByCreditCardAll($data)); 
        // echo json_encode($id);
-
 } else if ($_GET['action'] === 'listPostByCreditCardUser') {
-
         $array_surch = [                 
            // $data['surch']['fkcc'],
             $data['surch']['fkac'],            
@@ -361,17 +354,12 @@ if ($_GET['action'] === 'cadUser') {
             $data['surch']['date'],           
             $data['surch']['user'],
         ];
-
-       echo json_encode($s_pcc->listPostsByCreditCardUser($data));    
-             
+       echo json_encode($s_pcc->listPostsByCreditCardUser($data));             
 }else if ($_GET['action'] === 'listUsers') {
-
         $id = $data['id'];     
         echo json_encode($s_pcc->listUsersData($id)); 
-       // echo json_encode($id);
-  
-}else if ($_GET['action'] === 'amountCreditCard') {
-       
+       // echo json_encode($id);  
+}else if ($_GET['action'] === 'amountCreditCard') {       
       // $id = $data['id'];   
        $array_surch = [ 
         $data['surch']['fkac'],            
@@ -379,9 +367,7 @@ if ($_GET['action'] === 'cadUser') {
         $data['surch']['date'],                     
     ];  
        echo json_encode($s_pcc->amountData($data));
-
-}else if ($_GET['action'] === 'amountCreditCardByUser') {
-       
+}else if ($_GET['action'] === 'amountCreditCardByUser') {       
     $array_surch = [                
         $data['surch']['fkac'],            
         $data['surch']['due'],                      
@@ -389,17 +375,12 @@ if ($_GET['action'] === 'cadUser') {
         $data['surch']['user'],
     ];
       echo json_encode($s_pcc->amountDataByUser($data));   
-  
-}else if ($_GET['action'] === 'deletePostCreditCard') {
-       
+}else if ($_GET['action'] === 'deletePostCreditCard') {       
         $creditCard = [
               $data['creditCard']['id']
         ];
         echo json_encode($ccps->deletePost($data)); 
-         
-     
-}else if ($_GET['action'] === 'postTransaction') {  
-        
+}else if ($_GET['action'] === 'postTransaction') { 
     $array_transaction = [                 
         $data['transaction']['move'],
         $data['transaction']['date'],
@@ -412,17 +393,12 @@ if ($_GET['action'] === 'cadUser') {
         $data['transaction']['number'],
         $data['transaction']['idac'],        
   ];
-
    //  echo json_encode($array_transaction);
     echo json_encode($s_t->transactionsData($data));
-
-}else if ($_GET['action'] === 'proofTransaction') {
-    
+}else if ($_GET['action'] === 'proofTransaction') {    
     $fkac = $data['fkac'];
     echo json_encode($s_t->proofTransaction($fkac));
-
-}else if ($_GET['action'] === 'postCashMov') {
-    
+}else if ($_GET['action'] === 'postCashMov') {    
     $array_cashMov = [                 
         $data['cashMov']['date'],
         $data['cashMov']['type'],
@@ -432,19 +408,12 @@ if ($_GET['action'] === 'cadUser') {
         $data['cashMov']['value'],
         $data['cashMov']['fktrs'],        
   ];
-
     echo json_encode($s_cm->postCashMovData($data));
-
-}else if ($_GET['action'] === 'proofCashMov') {    
-   
+}else if ($_GET['action'] === 'proofCashMov') {  
     echo json_encode($s_cm->proofCashMov());
-
-}else if ($_GET['action'] === 'cashAmount') {    
-   
+}else if ($_GET['action'] === 'cashAmount') {  
     echo json_encode($s_cm->cashAmount());
-
-}else if ($_GET['action'] === 'postInvestments') { 
-  
+}else if ($_GET['action'] === 'postInvestments') {
     $array_investments = [                 
         $data['investments']['move'],
         $data['investments']['trans'],
@@ -460,21 +429,14 @@ if ($_GET['action'] === 'cadUser') {
         $data['investments']['desc'],        
         $data['investments']['idac'],        
   ];
-
     echo json_encode($s_inv->investmentsData($data));
-
-}else if ($_GET['action'] === 'proofInvestment') {    
-   
+}else if ($_GET['action'] === 'proofInvestment') {   
     $fkac = $data['fkac'];
     echo json_encode($s_inv->proofInvestment($fkac));
-
 }else if ($_GET['action'] === 'listInvestmentsByAc'){
-
     $idac = $data['idac'];  
     echo json_encode($s_inv->listInvestmentsByAc($idac));
-
-}else if ($_GET['action'] === 'postRescue') { 
-  
+}else if ($_GET['action'] === 'postRescue') {   
     $array_investments = [                 
         $data['investments']['move'],
         $data['investments']['trans'],
@@ -495,39 +457,25 @@ if ($_GET['action'] === 'cadUser') {
         $data['investments']['idac'],        
         $data['investments']['id'],
   ];
-
     echo json_encode($s_inv->investmentsData($data));
-
-}else if ($_GET['action'] === 'proofRescue') {    
-     
+}else if ($_GET['action'] === 'proofRescue') {  
     $id = $data['id'];       
     echo json_encode($s_inv->proofRescue($id));
-
 }else if ($_GET['action'] === 'postRendimentos') { 
-  
-    
     $array_profitability = [                 
         $data['profitability']['id'],
         $data['profitability']['value'],         
         $data['profitability']['date'],    
-    ];
-   
-  
-   // $array_profitability = [ $data['profitability']];  
-
-    echo json_encode($s_inv->postRendimentos($data['profitability']));
+    ];  
+   // $array_profitability = [ $data['profitability']]; 
+      echo json_encode($s_inv->postRendimentos($data['profitability']));
    // echo json_encode($s_inv->postRendimentos($array_investments, $data));
-
 }else if ($_GET['action'] === 'amountProfitability'){
-
     $id = $data['id'];
-    echo json_encode($s_inv->getAmountProfitability($id));  
-
+    echo json_encode($s_inv->getAmountProfitability($id)); 
 }else if ($_GET['action'] === 'conect'){
-
       $res = http_response_code(200);
       echo json_encode($res);
-
 }else if ($_GET['action'] === 'test'){
       echo json_encode("api working!!!"); 
 }
